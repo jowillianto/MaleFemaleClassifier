@@ -66,16 +66,17 @@ def main():
 	scheduler = StepLR(optimizer, step_size = 1, gamma = 0.8)
 
 	#Load Model If Available Minimal 1x training
-	model.load_state_dict(torch.load('models/trained.model'))
+	#model.load_state_dict(torch.load('models/trained.model'))
 	
 	# set your own epoch
-	"""
-	for epoch in range(15):
+
+	for epoch in range(50):
 		train(model, device, trainloader, optimizer, epoch)
 		scheduler.step()
-	save_models(model)
-	"""
+		save_models(model)
+		test(model, device, testloader)
+	
 	#For Testing Only
-	test(model, device, testloader)
+	
 if __name__ == "__main__":
 	main()

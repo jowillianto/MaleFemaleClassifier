@@ -25,10 +25,10 @@ data_transform = transforms.Compose([
     transforms.Resize((64,64)),
     transforms.ToTensor()
 ])
-
+a = int(input("Batch Size"))
 #Data Loading
 TestSet = datasets.ImageFolder('dataset/test', data_transform)
-TestLoader = torch.utils.data.DataLoader(TestSet, batch_size = 20)
+TestLoader = torch.utils.data.DataLoader(TestSet, batch_size = a)
 Data = iter(TestLoader)
 Image, Target = Data.next()
 
@@ -39,6 +39,6 @@ with torch.no_grad():
     Output = Net(Image).argmax(dim = 1, keepdim = True)
     print(Output)
 
-print('Truth     : ', ' '.join(Classes[Target[j]] for j in range(20)), ' ')
-print('Predicted : ', ' '.join(Classes[Output[j]] for j in range (20)), ' ')
+print('Truth     : ', ' '.join(Classes[Target[j]] for j in range(a)), ' ')
+print('Predicted : ', ' '.join(Classes[Output[j]] for j in range (a)), ' ')
 imshow(torchvision.utils.make_grid(Image))
